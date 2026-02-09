@@ -1,384 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LifeTrek - Desktop Productivity System</title>
-     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+  scroll-behavior: smooth;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #f0f0f0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        color: #f0f0f0;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
-        header {
-            padding: 60px 0 40px;
-            text-align: center;
-            position: relative;
-        }
+      header {
+        padding: 60px 0 40px;
+        text-align: center;
+        position: relative;
+      }
 
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
 
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: bold;
-            color: #0a0a0a;
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.3);
-        }
+      .logo-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        color: #0a0a0a;
+        box-shadow: 0 8px 32px rgba(0, 255, 255, 0.3);
+      }
 
+      h1 {
+        font-size: 3.5em;
+        font-weight: 300;
+        letter-spacing: -2px;
+        background: linear-gradient(135deg, #00ffff 0%, #ffffff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 15px;
+      }
+
+      .tagline {
+        font-size: 1.3em;
+        color: #a0a0a0;
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+
+      .version-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(0, 255, 255, 0.1);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 20px;
+        color: #00ffff;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 60px 0;
+        position: relative;
+      }
+
+      .hero-description {
+        font-size: 1.2em;
+        color: #c0c0c0;
+        max-width: 700px;
+        margin: 0 auto 50px;
+        line-height: 1.8;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 60px 0;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 35px 25px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 255, 255, 0.5);
+        box-shadow: 0 12px 40px rgba(0, 255, 255, 0.15);
+        background: rgba(0, 255, 255, 0.05);
+      }
+
+      .feature-icon {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      .feature-card h3 {
+        color: #00ffff;
+        font-size: 1.3em;
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .feature-card p {
+        color: #b0b0b0;
+        font-size: 0.95em;
+        line-height: 1.6;
+      }
+
+      .essentials-section {
+        /* border: 1px solid rgba(0, 255, 255, 0.2); */
+        border-radius: 20px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .essential-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 35px 25px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        height: 800px;
+      }
+
+      .download-section {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 255, 255, 0.1) 0%,
+          rgba(0, 255, 255, 0.05) 100%
+        );
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 50px;
+        margin: 60px 0;
+        text-align: center;
+      }
+
+      .download-section h2 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
+        color: #ffffff;
+        font-weight: 400;
+      }
+
+      .version-selector {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+      }
+
+      .version-option {
+        padding: 12px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: #c0c0c0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1em;
+      }
+
+      .version-option:hover {
+        border-color: rgba(0, 255, 255, 0.5);
+        color: #00ffff;
+      }
+
+      .version-option.active {
+        background: rgba(0, 255, 255, 0.2);
+        border-color: #00ffff;
+        color: #00ffff;
+      }
+
+      .download-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 16px 40px;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
+        color: #0a0a0a;
+        box-shadow: 0 8px 24px rgba(0, 255, 255, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 255, 255, 0.5);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .system-requirements {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .system-requirements h3 {
+        color: #a0a0a0;
+        font-size: 1em;
+        margin-bottom: 15px;
+        font-weight: 400;
+      }
+
+      .system-requirements p {
+        color: #808080;
+        font-size: 0.9em;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 0;
+        color: #606060;
+        font-size: 0.9em;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 60px;
+      }
+
+      @media (max-width: 768px) {
         h1 {
-            font-size: 3.5em;
-            font-weight: 300;
-            letter-spacing: -2px;
-            background: linear-gradient(135deg, #00ffff 0%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-        }
-
-        .tagline {
-            font-size: 1.3em;
-            color: #a0a0a0;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .version-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 20px;
-            color: #00ffff;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 60px 0;
-            position: relative;
-        }
-
-        .hero-description {
-            font-size: 1.2em;
-            color: #c0c0c0;
-            max-width: 700px;
-            margin: 0 auto 50px;
-            line-height: 1.8;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 35px 25px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 255, 0.5);
-            box-shadow: 0 12px 40px rgba(0, 255, 255, 0.15);
-            background: rgba(0, 255, 255, 0.05);
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            color: #00ffff;
-            font-size: 1.3em;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .feature-card p {
-            color: #b0b0b0;
-            font-size: 0.95em;
-            line-height: 1.6;
+          font-size: 2.5em;
         }
 
         .download-section {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0.05) 100%);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 50px;
-            margin: 60px 0;
-            text-align: center;
+          padding: 30px 20px;
         }
 
-        .download-section h2 {
-            font-size: 2.2em;
-            margin-bottom: 30px;
-            color: #ffffff;
-            font-weight: 400;
+        .features-grid {
+          grid-template-columns: 1fr;
         }
-
-        .version-selector {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 35px;
-            flex-wrap: wrap;
-        }
-
-        .version-option {
-            padding: 12px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #c0c0c0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1em;
-        }
-
-        .version-option:hover {
-            border-color: rgba(0, 255, 255, 0.5);
-            color: #00ffff;
-        }
-
-        .version-option.active {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .download-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 16px 40px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
-            color: #0a0a0a;
-            box-shadow: 0 8px 24px rgba(0, 255, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 255, 255, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .system-requirements {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .system-requirements h3 {
-            color: #a0a0a0;
-            font-size: 1em;
-            margin-bottom: 15px;
-            font-weight: 400;
-        }
-
-        .system-requirements p {
-            color: #808080;
-            font-size: 0.9em;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #606060;
-            font-size: 0.9em;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-
-            .download-section {
-                padding: 30px 20px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <div class="logo">
-                <div class="logo-icon">LT</div>
-                   <!-- <div class="logo-icon"><img src="./assets/lifetrek_lgo.png" width="60px" style="border-radius: 10px;"> </div> -->
-            </div>
-            <h1>LifeTrek</h1>
-            <p class="tagline">Lightweight Desktop Personal Productivity & Time Management System</p>
-            <span class="version-badge">Latest Release : v1.2.1</span>
-        </header>
+      <header>
+        <div class="logo">
+          <div class="logo-icon">LT</div>
+          <!-- <div class="logo-icon"><img src="./assets/lifetrek_lgo.png" width="60px" style="border-radius: 10px;"> </div> -->
+        </div>
+        <h1>LifeTrek</h1>
+        <p class="tagline">
+          Lightweight Desktop Personal Productivity & Time Management System
+        </p>
+        <span class="version-badge">Latest Release : v1.2.1</span>
+      </header>
 
-        <section class="hero-section">
+      <section class="feature-card">
+        <h2>New Essentials Unlocked!</h2>
+        <div class="essentials-section">
+          <div class="essential-item">
+            <h3>LifeTrek's Time Tracker</h3>
+            <div class="feature-icon">
+              <img src="./assets/lifetrek_desktop.png" width="400px"/>
+            </div>
             <p class="hero-description">
-                Master your time and tasks with an elegant, distraction-free productivity companion. 
-                LifeTrek combines powerful time tracking, task management, and organization tools 
-                in a beautifully minimal desktop application.
+              LifeTrek combines powerful time tracking, task management, and
+              organization tools in a beautifully minimal desktop application.
             </p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🍅</div>
-                    <h3>Pomodoro Timer</h3>
-                    <p>Stay focused with customizable work intervals and breaks. Built-in time tracking helps you understand your productivity patterns.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">✓</div>
-                    <h3>Smart Task Manager</h3>
-                    <p>Organize tasks with priority categorization. Keep everything in view and never miss what matters most.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
-                    <h3>Calendar Integration</h3>
-                    <p>Visualize deadlines and due dates at a glance. Plan your days, weeks, and months with clarity.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📝</div>
-                    <h3>To-Do Lists</h3>
-                    <p>Create unlimited lists and sublists. Break down complex projects into manageable steps.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="download-section">
-            <h2>Download LifeTrek</h2>
-            
             <div class="version-selector">
-                <button class="version-option active" onclick="selectVersion(this, 'latest')">Latest Stable (v1.2.1)</button>
-                <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
+             <a href="#time-tracker" style="text-decoration: none;"
+                class="version-option active"
+                onclick="{
+                    selectVersion(this, 'latest');
+                }"
+              >
+                Latest Stable (v1.2.1)
+            </a>
+              <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
             </div>
+          </div>
 
-            <div class="download-buttons">
-                <!-- <a href="#" class="btn btn-primary" onclick="downloadFromDrive(event)">
+          <div class="essential-item">
+            <h3>LifeTrek's Color Picker</h3>
+            <div class="feature-icon">
+              <img src="./assets/colorpicker_logo.png" width="420px" />
+            </div>
+            <p class="hero-description">
+              Another distraction-free productivity companion. LifeTrek combines
+              designing support with fast color picking. no hustles. just open.
+              pick the color. It's a cute minimal desktop application.
+            </p>
+
+            <div class="version-selector">
+              <a href="#color-picker" style="text-decoration: none;"
+                class="version-option active"
+                onclick="{
+                    selectVersion(this, 'latest');
+                }"
+              >
+                Latest Stable (v1.0.0)
+            </a>
+              <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero-section">
+        <p class="hero-description">
+          Master your time and tasks with an elegant, distraction-free
+          productivity companion. LifeTrek combines powerful time tracking, task
+          management, and organization tools in a beautifully minimal desktop
+          application.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🍅</div>
+            <h3>Pomodoro Timer</h3>
+            <p>
+              Stay focused with customizable work intervals and breaks. Built-in
+              time tracking helps you understand your productivity patterns.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">✓</div>
+            <h3>Smart Task Manager</h3>
+            <p>
+              Organize tasks with priority categorization. Keep everything in
+              view and never miss what matters most.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Calendar Integration</h3>
+            <p>
+              Visualize deadlines and due dates at a glance. Plan your days,
+              weeks, and months with clarity.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>To-Do Lists</h3>
+            <p>
+              Create unlimited lists and sublists. Break down complex projects
+              into manageable steps.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-section" id="time-tracker">
+        <h2>Download LifeTrek Time Tracker</h2>
+
+        <div class="version-selector">
+          <button
+            class="version-option active"
+            onclick="selectVersion(this, 'latest')"
+          >
+            Latest Stable (v1.2.1)
+          </button>
+          <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
+        </div>
+
+        <div class="download-buttons">
+          <!-- <a href="#" class="btn btn-primary" onclick="downloadFromDrive(event)">
                     <span>📥</span>
                     Download from Google Drive
                 </a> -->
-                <a href="#" class="btn btn-secondary" onclick="downloadFromGitHub(event)">
-                    <span>⚡</span>
-                    <!-- Download from GitHub -->
-                    Download
+          <a
+            href="#"
+            class="btn btn-secondary"
+            onclick="downloadFromGitHub(event)"
+          >
+            <span>⚡</span>
+            <!-- Download from GitHub -->
+            Download
+          </a>
+        </div>
+
+        <div class="system-requirements">
+          <h3>System Requirements</h3>
+          <p>Windows 10/11 (64-bit) • 4GB RAM • 400MB Disk Space</p>
+        </div>
+      </section>
+
+         <section class="download-section" id="color-picker">
+        <h2>Download LifeTrek Color Picker</h2>
+
+        <div class="version-selector">
+          <button
+            class="version-option active"
+            onclick="selectVersion(this, 'latest')"
+          >
+            Latest Stable (v1.0.0)
+          </button>
+          <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
+        </div>
+
+        <div class="download-buttons">
+          <a href="#" class="btn btn-primary" onclick="downloadFromDrive(event)">
+                    <span>📥</span>
+                    Download (without .NET Runtime)
                 </a>
-            </div>
+          <a
+            href="#"
+            class="btn btn-secondary"
+            onclick="downloadFromGitHub(event)"
+          >
+            <span>⚡</span>
+            <!-- Download from GitHub -->
+            Download
+          </a>
+        </div>
 
-            <div class="system-requirements">
-                <h3>System Requirements</h3>
-                <p>Windows 10/11 (64-bit) • 4GB RAM • 400MB Disk Space</p>
-            </div>
-        </section>
+        <div class="system-requirements">
+          <h3>System Requirements</h3>
+          <p>Windows 10/11 (64-bit) • 1GB RAM • 100MB Disk Space</p>
+          <p>.Net framework 9</p>
+        </div>
+      </section>
 
-        <footer>
-            <p>&copy; 2025 LifeTrek. Built with passion for productivity.</p>
-        </footer>
+      <footer>
+        <p>&copy; 2025 LifeTrek. Built with passion for productivity.</p>
+      </footer>
     </div>
 
     <script>
-        let currentVersion = 'latest';
+      let currentVersion = "latest";
 
-        // Replace these with your actual Google Drive and GitHub links
-        const downloadLinks = {
-            latest: {
-                drive: 'https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing',
-                github: 'https://github.com/bathiya96a/LifeTrek_Desktop/releases/download/v1.2.1/LifeTrek.Setup.1.2.1.exe'
-            },
-            beta: {
-                drive: 'https://drive.google.com/file/d/YOUR_BETA_FILE_ID/view?usp=sharing',
-                github: 'https://github.com/YOUR_USERNAME/lifetrek/releases/download/v1.1.0-beta/LifeTrek-Setup-Beta.exe'
-            }
-        };
+      // Replace these with your actual Google Drive and GitHub links
+      const downloadLinks = {
+        latest: {
+          drive:
+            "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing",
+          github:
+            "https://github.com/bathiya96a/LifeTrek_Desktop/releases/download/v1.2.1/LifeTrek.Setup.1.2.1.exe",
+        },
+        beta: {
+          drive:
+            "https://drive.google.com/file/d/YOUR_BETA_FILE_ID/view?usp=sharing",
+          github:
+            "https://github.com/YOUR_USERNAME/lifetrek/releases/download/v1.1.0-beta/LifeTrek-Setup-Beta.exe",
+        },
+      };
 
-        function selectVersion(element, version) {
-            document.querySelectorAll('.version-option').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            element.classList.add('active');
-            currentVersion = version;
-        }
+      function selectVersion(element, version) {
+        document.querySelectorAll(".version-option").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        element.classList.add("active");
+        currentVersion = version;
+      }
 
-        function downloadFromDrive(e) {
-            e.preventDefault();
-            const link = downloadLinks[currentVersion].drive;
-            window.open(link, '_blank');
-        }
+      function downloadFromDrive(e) {
+        e.preventDefault();
+        const link = downloadLinks[currentVersion].drive;
+        window.open(link, "_blank");
+      }
 
-        function downloadFromGitHub(e) {
-            e.preventDefault();
-            const link = downloadLinks[currentVersion].github;
-            window.open(link, '_blank');
-        }
+      function downloadFromGitHub(e) {
+        e.preventDefault();
+        const link = downloadLinks[currentVersion].github;
+        window.open(link, "_blank");
+      }
     </script>
-</body>
+  </body>
 </html>
