@@ -11,10 +11,10 @@
         padding: 0;
         box-sizing: border-box;
       }
-      
+
       html {
-  scroll-behavior: smooth;
-}
+        scroll-behavior: smooth;
+      }
 
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -318,7 +318,7 @@
           <div class="essential-item">
             <h3>LifeTrek's Time Tracker</h3>
             <div class="feature-icon">
-              <img src="./assets/lifetrek_desktop.png" width="400px"/>
+              <img src="./assets/lifetrek_desktop.png" width="400px" />
             </div>
             <p class="hero-description">
               LifeTrek combines powerful time tracking, task management, and
@@ -326,14 +326,18 @@
             </p>
 
             <div class="version-selector">
-             <a href="#time-tracker" style="text-decoration: none;"
+              <a
+                href="#time-tracker"
+                style="text-decoration: none"
                 class="version-option active"
-                onclick="{
+                onclick="
+                  {
                     selectVersion(this, 'latest');
-                }"
+                  }
+                "
               >
                 Latest Stable (v1.2.1)
-            </a>
+              </a>
               <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
             </div>
           </div>
@@ -350,14 +354,18 @@
             </p>
 
             <div class="version-selector">
-              <a href="#color-picker" style="text-decoration: none;"
+              <a
+                href="#color-picker"
+                style="text-decoration: none"
                 class="version-option active"
-                onclick="{
+                onclick="
+                  {
                     selectVersion(this, 'latest');
-                }"
+                  }
+                "
               >
                 Latest Stable (v1.0.0)
-            </a>
+              </a>
               <!-- <button class="version-option" onclick="selectVersion(this, 'beta')">Beta (v1.1.0-beta)</button> -->
             </div>
           </div>
@@ -446,7 +454,7 @@
         </div>
       </section>
 
-         <section class="download-section" id="color-picker">
+      <section class="download-section" id="color-picker">
         <h2>Download LifeTrek Color Picker</h2>
 
         <div class="version-selector">
@@ -460,14 +468,18 @@
         </div>
 
         <div class="download-buttons">
-          <a href="#" class="btn btn-primary" onclick="downloadFromDrive(event)">
-                    <span>📥</span>
-                    Download (without .NET Runtime)
-                </a>
+          <a
+            href="#"
+            class="btn btn-primary"
+            onclick="downloadSetupFromDGitHub(event)"
+          >
+            <span>📥</span>
+            Download (without .NET Runtime)
+          </a>
           <a
             href="#"
             class="btn btn-secondary"
-            onclick="downloadFromGitHub(event)"
+            onclick="downloadFullSetupFromGitHub(event)"
           >
             <span>⚡</span>
             <!-- Download from GitHub -->
@@ -506,6 +518,15 @@
         },
       };
 
+      const ColorPickerDownloadLinks = {
+        latest: {
+          github_FullSetup:
+            "https://github.com/bathiya96a/LifeTrekColorPickerSetups/releases/download/LifeTrek_ColorPicker-v1.0.0/LifeTrek-ColorPicker-Setup.v1.0.0.exe",
+          github_Setup:
+            "https://github.com/bathiya96a/LifeTrekColorPickerSetups/releases/download/LifeTrek_ColorPicker_(without_dotnet)-v1.0.0/LifeTrek_ColorPicker_.without_dotnet.-v1.0.0.exe",
+        },
+      };
+
       function selectVersion(element, version) {
         document.querySelectorAll(".version-option").forEach((btn) => {
           btn.classList.remove("active");
@@ -523,6 +544,18 @@
       function downloadFromGitHub(e) {
         e.preventDefault();
         const link = downloadLinks[currentVersion].github;
+        window.open(link, "_blank");
+      }
+
+      function downloadSetupFromDGitHub(e) {
+        e.preventDefault();
+        const link = ColorPickerDownloadLinks[currentVersion].github_Setup;
+        window.open(link, "_blank");
+      }
+
+      function downloadFullSetupFromGitHub(e) {
+        e.preventDefault();
+        const link = ColorPickerDownloadLinks[currentVersion].github_FullSetup;
         window.open(link, "_blank");
       }
     </script>
